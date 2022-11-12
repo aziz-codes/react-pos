@@ -12,6 +12,12 @@ const Sidebar = () => {
     }
   };
 
+  // const handleNavClick = () =>{
+  //   if(activeMenu && screenSize >900){
+
+  //   }
+  // }
+
   const normalLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-gray-100 m-2";
   const activeLink =
@@ -25,7 +31,7 @@ const Sidebar = () => {
         <>
           <div className="flex justify-between items-center ">
             <Link
-              to="/"
+              to="/dashboard"
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-bold tracking-tight dark:text-white text-slate-900"
             >
               <FcPositiveDynamic className="h-10 w-10" />
@@ -47,6 +53,7 @@ const Sidebar = () => {
                   className={({ isActive }) =>
                     isActive ? activeLink : normalLink
                   }
+                  onClick={handleClose}
                 >
                   {item.icon}
                   <span className="font-semibold tracking-normal">

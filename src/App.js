@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
-import { Orders, Finance, Users } from "./pages/index";
+import { Orders, Finance, Users, Dashboard } from "./pages/index";
 import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const { activeMenu } = useStateContext();
@@ -28,8 +28,9 @@ const App = () => {
               <div className="fixed md:static w-full">
                 <Navbar />
               </div>
-              <div>
+              <div className="ml-4">
                 <Routes>
+                  <Route path="/" element={<Dashboard />} />
                   <Route path="/orders" element={<Orders />} />
                   <Route path="/finance" element={<Finance />} />
                   <Route path="/users" element={<Users />} />
