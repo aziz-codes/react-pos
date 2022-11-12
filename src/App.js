@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
 import { Orders, Finance, Users } from "./pages/index";
+import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
   const isLoggedIn = true;
   return (
     <>

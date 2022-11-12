@@ -3,9 +3,13 @@ import { FcPositiveDynamic } from "react-icons/fc";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { links } from "../data/dummy";
 import { NavLink, Link } from "react-router-dom";
+import { useStateContext } from "../contexts/ContextProvider";
 const Sidebar = () => {
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
   const handleClose = () => {
-    alert("hello");
+    if (activeMenu && screenSize <= 900) {
+      setActiveMenu(false);
+    }
   };
 
   const normalLink =
@@ -17,37 +21,43 @@ const Sidebar = () => {
       className=" h-screen md:overflow-hidden overflow-auto
   md:hover:overflow-auto pb-10 shadow-xl"
     >
-      <div className="flex justify-between items-center ">
-        <Link
-          to="/"
-          className="items-center gap-3 ml-3 mt-4 flex text-xl font-bold tracking-tight dark:text-white text-slate-900"
-        >
-          <FcPositiveDynamic className="h-10 w-10" />
-          <span className="font-extrabold text-xl tracking-tight">
-            Shoppify
-          </span>
-        </Link>
-
-        <button onClick={handleClose}>
-          <IoIosCloseCircleOutline />
-        </button>
-      </div>
-
-      <div className="pb-10 overflow-y-auto mt-14">
-        {links.map((item, index) => (
-          <div key={index}>
-            <NavLink
-              to={item.path}
-              className={({ isActive }) => (isActive ? activeLink : normalLink)}
+      {activeMenu && (
+        <>
+          <div className="flex justify-between items-center ">
+            <Link
+              to="/"
+              className="items-center gap-3 ml-3 mt-4 flex text-xl font-bold tracking-tight dark:text-white text-slate-900"
             >
-              {item.icon}
-              <span className="font-semibold tracking-normal">
-                {item.label}
+              <FcPositiveDynamic className="h-10 w-10" />
+              <span className="font-extrabold text-xl tracking-tight">
+                Shoppify
               </span>
-            </NavLink>
+            </Link>
+
+            <button onClick={handleClose}>
+              <IoIosCloseCircleOutline />
+            </button>
           </div>
-        ))}
-      </div>
+
+          <div className="pb-10 overflow-y-auto mt-14">
+            {links.map((item, index) => (
+              <div key={index}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    isActive ? activeLink : normalLink
+                  }
+                >
+                  {item.icon}
+                  <span className="font-semibold tracking-normal">
+                    {item.label}
+                  </span>
+                </NavLink>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
